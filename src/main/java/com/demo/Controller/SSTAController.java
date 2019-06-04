@@ -61,7 +61,7 @@ public class SSTAController {
 	@GetMapping(value = "/{id}")
 	public Student getStudentByID(@PathVariable String id) {
 
-		return Optional
+		return Optional 
 				.ofNullable(studentRepository.findById(new BigDecimal(id)))
 				.orElse(new Student(new BigDecimal("100"), "User1", "SAAA", "+65 12312",
 						"user@email.com"));
