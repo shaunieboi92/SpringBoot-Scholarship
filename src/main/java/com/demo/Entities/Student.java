@@ -1,14 +1,24 @@
 package com.demo.Entities;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 //import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * nric
@@ -44,7 +54,35 @@ public class Student {
 	
 	@Column(name = "EMAIL", length = 255)
 	private String email;
+	
+	/**
+	 * One to Many
+	 */
+	
+	/** The awards. */
+//	(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
+	private List<Award> awardList = new ArrayList<>();
+	  
+	  
+	/**
+	 * 
+	 * @return awardList
+	 */
+	public List<Award> getAwards() {
+		return awardList;
+	}
 
+	/**
+	 * Sets the awardList.
+	 *
+	 * @param awardList the new awardList
+	 */
+	public void setAwards(List<Award> awardList) {
+		this.awardList = awardList;
+	}
+	  
 	public BigDecimal getId() {
 		return id;
 	}
@@ -83,6 +121,8 @@ public class Student {
 	public void setNric(String nric) {
 		this.nric = nric;
 	}
+	
+	
 	public Student(BigDecimal id, String name, String nric, String phoneNumber,
 			String email) {
 		super();

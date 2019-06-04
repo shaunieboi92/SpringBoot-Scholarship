@@ -21,5 +21,11 @@ public interface StudentRepository extends JpaRepository<Student, BigDecimal>{
 	
 	/**find by award type etc**/
 	
+	/**
+	 * find List by Student Name
+	 */
+	@Query("SELECT f FROM Student f where LOWER (f.name) = LOWER(:name)")
+	Student findByName(@Param("name") String name);
+	
 	
 }
