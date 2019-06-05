@@ -1,6 +1,7 @@
 package com.demo.Repository;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,13 +12,8 @@ import com.demo.Entities.Student;
 
 import org.springframework.data.repository.query.Param;
 
-@Component
+@Repository
 public interface StudentRepository extends JpaRepository<Student, BigDecimal>{
-	/**
-	 * find by ID
-	 */
-	@Query("SELECT f FROM Student f where LOWER (f.id) = LOWER(:id)")
-	Student findById(@Param("id") BigDecimal id);
 	
 	/**find by award type etc**/
 	

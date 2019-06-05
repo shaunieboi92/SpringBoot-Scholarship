@@ -20,12 +20,26 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "TABLE_AWARD")
 public class Award {
 	
 //	private List<Award> awards;
 	
+	public Award(BigDecimal id, String awardName, String awardDesc,
+			Date startDate, Date endDate, Student student) {
+		super();
+		this.id = id;
+		this.awardName = awardName;
+		this.awardDesc = awardDesc;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.student = student;
+	}
+
 	/**
 	 * Id
 	 */
@@ -58,6 +72,12 @@ public class Award {
 	@Column(name = "END_DATE", length = 255)
 	private Date endDate;
 	
+	 /** The Student */
+	@ManyToOne
+	@JoinColumn(name = "STUDENT_ID")
+	private Student student;
+	
+	
 	public String getAwardDesc() {
 		return awardDesc;
 	}
@@ -73,12 +93,8 @@ public class Award {
 	public void setAwardName(String awardName) {
 		this.awardName = awardName;
 	}
-
-	 /** The Student */
-	@ManyToOne
-	@JoinColumn(name = "STUDENT_ID")
-	private Student student;
 	
+
 	
 	/**
 	   * Gets the Student.

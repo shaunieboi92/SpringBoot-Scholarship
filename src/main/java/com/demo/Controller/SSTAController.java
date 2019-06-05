@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -50,9 +51,8 @@ public class SSTAController {
 	// }
 	//
 	@GetMapping(value = "/AWARD" + "/{id}")
-	public Award findAwardbyId(@PathVariable String id) {
-		return Optional.ofNullable(awardRepository.findById(new BigDecimal(id)))
-				.orElse(new Award());
+	public Optional<Award> findAwardbyId(@PathVariable String id) {
+		return awardRepository.findById(new BigDecimal(id));
 	}
 
 	@GetMapping(value = SSTAConstants.AWARD)
@@ -69,7 +69,7 @@ public class SSTAController {
 	// }
 
 	/**
-	  * gettingStudentsByAwards
+	  * gettingAwardsByStudentName
 	  */
 	 @GetMapping(value = "/AWARD" + "/retrieveAwards" + "/{studentName}")
 	 public List<Award> getAwardsByStudentName(@PathVariable String studentName) {
@@ -85,13 +85,10 @@ public class SSTAController {
 
 	@GetMapping(value = "/{id}")
 	// public Student getStudentByID(@PathVariable String id) {
-	public Student getStudentByID(@PathVariable String id) {
+	public Optional<Student> getStudentByID(@PathVariable String id) {
 
-		return Optional
-				.ofNullable(studentRepository.findById(new BigDecimal(id)))
-				.orElse(new Student(new BigDecimal("100"), "User1", "SAAA",
-						"+65 12312", "user@email.com"));
-		// .orElseThrow(IllegalArgumentException::new);
+		return studentRepository.findById(new BigDecimal(id));
+				
 	}
 
 	@RequestMapping("/test")

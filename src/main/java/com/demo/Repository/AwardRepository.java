@@ -14,11 +14,9 @@ import org.springframework.stereotype.Repository;
 
 import com.demo.Entities.Award;
 
-@Component
-public interface AwardRepository extends JpaRepository<Award, BigDecimal> {
 
-	@Query("SELECT f FROM Award f where LOWER (f.id) = LOWER(:id)")
-	Award findById(@Param("id") BigDecimal id);
+@Repository
+public interface AwardRepository extends JpaRepository<Award, BigDecimal> {
 
 	/**
 	 * Find by valid date
