@@ -15,7 +15,7 @@ public class SSTAControllerException extends Exception{
     public SSTAControllerException(String errCode, String errMsg, String className, Exception e) {
         this.errCode = errCode;
         this.errMsg = errMsg;
-        this.e = e; 
+        this.e = e;  
         this.logClass = className;
     }
  
