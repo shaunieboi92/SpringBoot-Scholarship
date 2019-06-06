@@ -12,11 +12,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.demo.Entities.Award;
+import com.demo.Model.Award;
 
 
 @Repository
-public interface AwardRepository extends JpaRepository<Award, BigDecimal> {
+public interface AwardRepository extends JpaRepository<Award, Long> {
 
 	/**
 	 * Find by valid date

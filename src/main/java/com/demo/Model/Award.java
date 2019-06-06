@@ -1,4 +1,4 @@
-package com.demo.Entities;
+package com.demo.Model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class Award {
 	
 //	private List<Award> awards;
 	
-	public Award(BigDecimal id, String awardName, String awardDesc,
+	public Award(Long id, String awardName, String awardDesc,
 			Date startDate, Date endDate, Student student) {
 		super();
 		this.id = id;
@@ -46,7 +46,7 @@ public class Award {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(precision = 19, scale = 0)
-	private BigDecimal id;
+	private Long id;
 	
 	/**
 	 * awardName
@@ -124,11 +124,11 @@ public class Award {
 		this.student = student;
 	}
 
-	public BigDecimal getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(BigDecimal id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

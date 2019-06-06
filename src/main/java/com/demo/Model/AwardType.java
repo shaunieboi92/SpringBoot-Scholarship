@@ -1,4 +1,4 @@
-package com.demo.Entities;
+package com.demo.Model;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,7 +27,7 @@ public class AwardType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(precision = 19, scale = 0)
-	private BigDecimal id;
+	private Long id;
 
 	@Column(name = "NAME", length = 255)
 	@NotBlank
@@ -40,11 +40,11 @@ public class AwardType {
 	@OneToMany(targetEntity = Award.class, mappedBy = "awardType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Award> awardList;
 
-	public BigDecimal getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(BigDecimal id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

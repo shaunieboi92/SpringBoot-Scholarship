@@ -8,12 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.demo.Entities.Student;
+import com.demo.Model.Student;
 
 import org.springframework.data.repository.query.Param;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, BigDecimal>{
+public interface StudentRepository extends JpaRepository<Student, Long>{
 	
 	/**
 	 * find List by Student Name

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.demo.Entities.AwardType;
+import com.demo.Model.AwardType;
 
 @Repository
 public interface AwardTypeRepository extends JpaRepository<AwardType, BigDecimal> {

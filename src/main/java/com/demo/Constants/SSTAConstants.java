@@ -14,6 +14,8 @@ public class SSTAConstants {
 	
 	public static final String MAIN = "/SSTA";
 	
+	public static final String STUDENT = "/student";
+	
 	private SSTAConstants() {
 	}
 	
