@@ -21,13 +21,26 @@ import com.demo.Model.Award;
 import com.demo.Model.Student;
 import com.demo.Service.StudentService;
 
+/**
+*
+* Copyright (c) 2019
+* System : SSTAnew
+* Subsystem: StudentController
+* File: StudentController.java
+* Change History
+* Date               Version        Author
+* -------------------------------------------------
+* Jun 6, 2019         v0.1			Shaun
+*
+* Description
+*
+*/
 @RestController
 @RequestMapping(SSTAConstants.MAIN)
 public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
-	
 	
 	/**
 	 * getStudents
@@ -63,14 +76,19 @@ public class StudentController {
 	}
 	
 	
-	
+	/**
+	 * deleteStudent
+	 * @param id
+	 * @throws SSTAControllerException
+	 */
 	@PostMapping(value = SSTAConstants.STUDENT + "/delete" + "/{id}")
-	public void deletePersion(@Valid @RequestBody String id) throws SSTAControllerException {
+	public void deleteStudent(@Valid @RequestBody String id) throws SSTAControllerException {
 		studentService.deleteStudent(Long.parseLong(id));
 	}
 	
 	/**
 	  * gettingAwardsByStudentName
+	  *  @param studentName
 	  * @return list
 	  */
 	 @GetMapping(value = SSTAConstants.AWARD + "/retrieveAwards" + "/{studentName}")

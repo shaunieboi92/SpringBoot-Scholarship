@@ -29,16 +29,15 @@ import com.demo.Repository.AwardRepository;
 import com.demo.Repository.AwardTypeRepository;
 import com.demo.Service.AwardService;
 
-
 @Service
-public class AwardServiceImpl implements AwardService{
-	
+public class AwardServiceImpl implements AwardService {
+
 	@Autowired
 	AwardRepository awardRepository;
-	
+
 	@Autowired
 	AwardTypeRepository awardTypeRepository;
-	
+
 	@Override
 	@Transactional
 	public List<Award> getListOfAwards() {
@@ -47,15 +46,18 @@ public class AwardServiceImpl implements AwardService{
 				.orElse(new ArrayList<>());
 		return awdList.stream().collect(Collectors.toList());
 	}
-	
+
 	@Override
 	@Transactional
-	public Award getAward(long id) throws NumberFormatException, SSTAControllerException {
-		return awardRepository.findById(id).orElseThrow(() -> new SSTAControllerException(
-				SSTAErrorConstants.A1001.getErrorCode(),
-				SSTAErrorConstants.A1001.getErrorMessage(),
-				new ResourceNotFoundException(id)));
-		
+	public Award getAward(long id)
+			throws NumberFormatException, SSTAControllerException {
+		return awardRepository.findById(id)
+				.orElseThrow(() -> new SSTAControllerException(
+						SSTAErrorConstants.A1001.getErrorCode(),
+						SSTAErrorConstants.A1001.getErrorMessage(),
+						this.getClass().getCanonicalName(),
+						new ResourceNotFoundException(id)));
+
 	}
 
 	@Override
@@ -66,14 +68,15 @@ public class AwardServiceImpl implements AwardService{
 		} catch (UnexpectedRollbackException | PersistenceException e) {
 			throw new SSTAControllerException(
 					SSTAErrorConstants.A1001.getErrorCode(),
-					SSTAErrorConstants.A1001.getErrorMessage(), e);
+					SSTAErrorConstants.A1001.getErrorMessage(),
+					this.getClass().getCanonicalName(), e);
 		}
 	}
-	
+
 	@Override
 	@Transactional
-	public List <AwardType> getTypes() {
-		 return awardTypeRepository.findAll();
+	public List<AwardType> getTypes() {
+		return awardTypeRepository.findAll();
 	}
 
 	@Override
@@ -84,7 +87,8 @@ public class AwardServiceImpl implements AwardService{
 		} catch (JDBCException e) {
 			throw new SSTAControllerException(
 					SSTAErrorConstants.A1001.getErrorCode(),
-					SSTAErrorConstants.A1001.getErrorMessage(), e);
+					SSTAErrorConstants.A1001.getErrorMessage(),
+					this.getClass().getCanonicalName(), e);
 		}
 	}
 

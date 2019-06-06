@@ -40,7 +40,8 @@ public class StudentServiceImpl implements StudentService {
 		} catch (UnexpectedRollbackException | PersistenceException e) {
 			throw new SSTAControllerException(
 					SSTAErrorConstants.A1001.getErrorCode(),
-					SSTAErrorConstants.A1001.getErrorMessage(), e);
+					SSTAErrorConstants.A1001.getErrorMessage(),
+					this.getClass().getCanonicalName(), e);
 		}
 
 	}
@@ -52,6 +53,7 @@ public class StudentServiceImpl implements StudentService {
 				.orElseThrow(() -> new SSTAControllerException(
 						SSTAErrorConstants.A1002.getErrorCode(),
 						SSTAErrorConstants.A1002.getErrorMessage(),
+						this.getClass().getCanonicalName(),
 						new ResourceNotFoundException(id)));
 	}
 
@@ -63,7 +65,8 @@ public class StudentServiceImpl implements StudentService {
 		} catch (JDBCException e) {
 			throw new SSTAControllerException(
 					SSTAErrorConstants.A1001.getErrorCode(),
-					SSTAErrorConstants.A1001.getErrorMessage(), e);
+					SSTAErrorConstants.A1001.getErrorMessage(),
+					this.getClass().getCanonicalName(), e);
 		}
 	}
 
