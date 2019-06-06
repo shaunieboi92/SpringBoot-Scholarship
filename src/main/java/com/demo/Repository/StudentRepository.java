@@ -15,8 +15,6 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, BigDecimal>{
 	
-	/**find by award type etc**/
-	
 	/**
 	 * find List by Student Name
 	 */

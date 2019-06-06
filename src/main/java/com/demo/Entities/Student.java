@@ -16,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -44,11 +44,11 @@ public class Student {
 
 	/** name */
 	@Column(name = "NAME", length = 255)
-	// @NotBlank
+	@NotBlank
 	private String name;
 
 	@Column(name = "NRIC", length = 255)
-	// @NotBlank
+	@NotBlank
 	private String nric;
 
 	@Column(name = "PHONE", length = 255)
@@ -57,14 +57,11 @@ public class Student {
 	@Column(name = "EMAIL", length = 255)
 	private String email;
 
-	/**
-	 * One to Many
-	 */
 
-	/** The awards. */
-	// (mappedBy = "student", fetch = FetchType.LAZY, cascade =
-	// CascadeType.MERGE)
-	
+	/**
+	 * The awards
+	 * OneToMany
+	 */
 	@OneToMany(targetEntity = Award.class, mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Award> awardList;
 

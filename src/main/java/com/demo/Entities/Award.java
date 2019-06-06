@@ -72,10 +72,19 @@ public class Award {
 	@Column(name = "END_DATE", length = 255)
 	private Date endDate;
 	
-	 /** The Student */
+	 /** 
+	  * The Student 
+	  */
 	@ManyToOne
 	@JoinColumn(name = "STUDENT_ID")
 	private Student student;
+	
+	 /** 
+	  * The AwardType
+	  */
+	@ManyToOne
+	@JoinColumn(name = "AWARD_TYPE_ID")
+	private AwardType awardType;
 	
 	
 	public String getAwardDesc() {

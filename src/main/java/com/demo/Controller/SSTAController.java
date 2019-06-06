@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.Constants.SSTAConstants;
 import com.demo.Entities.Award;
+import com.demo.Entities.AwardType;
 import com.demo.Entities.Student;
 import com.demo.Exception.SSTAException;
 import com.demo.Repository.AwardRepository;
+import com.demo.Repository.AwardTypeRepository;
 import com.demo.Repository.StudentRepository;
 import com.demo.Response.SSTAServiceResponse;
 
@@ -39,18 +41,11 @@ public class SSTAController {
 
 	@Autowired
 	AwardRepository awardRepository;
+	
+	@Autowired
+	AwardTypeRepository awardTypeRepository;
 
-	// @RequestMapping(value = SSTAConstants.MAIN)
-	// public String index() {
-	// return "Greetings from Spring Boot1!";
-	// }
-
-	// @RequestMapping(value = SSTAConstants.AWARD_HOLDER)
-	// public String index1() {
-	// return "Greetings from Spring Boot2!";
-	// }
-	//
-	@GetMapping(value = "/AWARD" + "/{id}")
+	@GetMapping(value = SSTAConstants.AWARD + "/{id}")
 	public Optional<Award> findAwardbyId(@PathVariable String id) {
 		return awardRepository.findById(new BigDecimal(id));
 	}
@@ -62,14 +57,28 @@ public class SSTAController {
 				.orElse(new ArrayList<>());
 		return awdList.stream().collect(Collectors.toList());
 	}
-	//
-	// @RequestMapping(value = SSTAConstants.MAIN + SSTAConstants.AWARD_TYPE)
-	// public String index4() {
-	// return "Greetings from Spring Boot4!";
-	// }
+	
+	/**
+	 * gettingListofAwardTypes
+	 * @return list
+	 */
+	 @RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE)
+	 public List<AwardType> getListOfAwardType() {
+		 return awardTypeRepository.findAll();
+	 }
+	 
+	 /**
+	   * gettingListofAwardByAwardType
+	   * @return list
+	   */
+	 @RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE + "/{typeName}")
+	 public List<Award> getListOfAwardsByAwardType(@PathVariable String typeName) {
+		 return awardTypeRepository.findByName(typeName).getAwardList();
+	 }
 
 	/**
 	  * gettingAwardsByStudentName
+	  * @return list
 	  */
 	 @GetMapping(value = "/AWARD" + "/retrieveAwards" + "/{studentName}")
 	 public List<Award> getAwardsByStudentName(@PathVariable String studentName) {
@@ -84,7 +93,6 @@ public class SSTAController {
 	}
 
 	@GetMapping(value = "/{id}")
-	// public Student getStudentByID(@PathVariable String id) {
 	public Optional<Student> getStudentByID(@PathVariable String id) {
 
 		return studentRepository.findById(new BigDecimal(id));

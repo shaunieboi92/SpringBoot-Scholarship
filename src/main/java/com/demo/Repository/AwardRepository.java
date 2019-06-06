@@ -27,8 +27,5 @@ public interface AwardRepository extends JpaRepository<Award, BigDecimal> {
 	 */
 	@Query("SELECT f FROM Award f where LOWER(:toDate) >= LOWER (f.startDate) AND LOWER(:toDate) <= LOWER(f.endDate)")
 	Collection<Award> findAllEffective(@Param("toDate") Date toDate);
-	
-//	@Query("SELECT f FROM Award f where LOWER(:awardName) = LOWER (f.startDate) AND LOWER(:toDate) <= LOWER(f.endDate)")
-//	Collection<Student> findStudentByAward(@Param("awardName") String awardName);
 
 }
