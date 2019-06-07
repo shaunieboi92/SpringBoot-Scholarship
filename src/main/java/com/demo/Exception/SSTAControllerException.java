@@ -2,7 +2,7 @@ package com.demo.Exception;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class SSTAControllerException extends Exception{
 	private static final long serialVersionUID = 1L;
 	

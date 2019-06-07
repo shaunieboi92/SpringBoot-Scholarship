@@ -1,4 +1,4 @@
-package com.demo.Response;
+package com.demo.Payload.Response;
 
 public class SSTAServiceResponse {
 

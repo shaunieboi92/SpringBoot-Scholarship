@@ -9,6 +9,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,44 +29,51 @@ import com.demo.Service.StudentService;
 @RestController
 @RequestMapping(SSTAConstants.MAIN)
 public class AwardController {
-	
+
 	@Autowired
 	private AwardService awardService;
-	
+
 	/**
 	 * findAwardbyId
+	 * 
 	 * @param id
 	 * @return Award
 	 */
 	@GetMapping(value = SSTAConstants.AWARD + "/{id}")
-	public Award findAwardbyId(@PathVariable String id) throws NumberFormatException, SSTAControllerException {
-		return awardService.getAward(Long.parseLong(id));
+	public ResponseEntity<Award> findAwardbyId(@PathVariable Long id)
+			throws NumberFormatException, SSTAControllerException {
+		return new ResponseEntity<Award>(awardService.getAward(id), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * getListOfAwards
+	 * 
 	 * @return List
 	 */
 	@GetMapping(value = SSTAConstants.AWARD)
 	public List<Award> getListOfAwards() {
 		return awardService.getListOfAwards();
 	}
-	
+
 	/**
 	 * gettingListofAwardTypes
+	 * 
 	 * @return list
 	 */
-	 @RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE)
-	 public List<AwardType> getListOfAwardType() {
-		 return awardService.getTypes();
-	 }
-	 
-	 /**
-	   * gettingListofAwardByAwardType
-	   * @return list
-	   */
-	 @RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE + "/{typeName}")
-	 public List<Award> getListOfAwardsByAwardType(@PathVariable String typeName) {
-		 return awardService.getListOfAwardsByAwardType(typeName);
-	 }
+	@RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE)
+	public List<AwardType> getListOfAwardType() {
+		return awardService.getTypes();
+	}
+
+	/**
+	 * gettingListofAwardByAwardType
+	 * 
+	 * @return list
+	 */
+	@RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE
+			+ "/{typeName}")
+	public List<Award> getListOfAwardsByAwardType(
+			@PathVariable String typeName) {
+		return awardService.getListOfAwardsByAwardType(typeName);
+	}
 }

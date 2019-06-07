@@ -60,8 +60,8 @@ public class StudentController {
 	 * @throws NumberFormatException 
 	 */
 	@GetMapping(value = SSTAConstants.STUDENT + "/{id}")
-	public Student getStudentByID(@PathVariable String id) throws NumberFormatException, SSTAControllerException {
-		return studentService.getStudent(Long.parseLong(id));				
+	public Student getStudentByID(@PathVariable Long id) throws NumberFormatException, SSTAControllerException {
+		return studentService.getStudent(id);				
 	}
 	
 	/**
@@ -82,8 +82,8 @@ public class StudentController {
 	 * @throws SSTAControllerException
 	 */
 	@PostMapping(value = SSTAConstants.STUDENT + "/delete" + "/{id}")
-	public void deleteStudent(@Valid @RequestBody String id) throws SSTAControllerException {
-		studentService.deleteStudent(Long.parseLong(id));
+	public void deleteStudent(@Valid @RequestBody Long id) throws SSTAControllerException {
+		studentService.deleteStudent(id);
 	}
 	
 	/**
