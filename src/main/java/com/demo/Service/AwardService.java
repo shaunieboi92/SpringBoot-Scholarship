@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.demo.Constants.SSTAConstants;
+import com.demo.Exception.ResourceNotFoundException;
 import com.demo.Exception.SSTAControllerException;
 import com.demo.Model.Award;
 import com.demo.Model.AwardType;

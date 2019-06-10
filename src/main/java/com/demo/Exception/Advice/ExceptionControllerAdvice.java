@@ -1,33 +1,45 @@
 package com.demo.Exception.Advice;
 
+import java.util.Date;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.demo.Exception.ResourceNotFoundException;
 import com.demo.Exception.SSTAControllerException;
+import com.demo.Payload.Response.SSTAServiceResponse;
 
+/**
+ * 
+ * @author shaun.lee Customized error Response
+ */
 @ControllerAdvice
-public class ExceptionControllerAdvice {
+@RestController
+public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
+
 	
-//  (SSTAControllerException.class)
-    @ExceptionHandler
-    public ModelAndView exceptionHandler(SSTAControllerException mex) {
- 
-        ModelAndView model = new ModelAndView();
-        model.addObject("errCode", mex.getErrCode());
-        model.addObject("errMsg", mex.getErrMsg());
-        model.setViewName("error/generic_error");
-        return model;
-    }
- 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleException(Exception ex) {
- 
-        ModelAndView model = new ModelAndView();
-        model.addObject("errMsg", "This is a 'Exception.class' message.");
-        model.setViewName("error/generic_error");
-        return model;
- 
-    }
-	
+	//gets enclosed Exception messages
+	@ExceptionHandler(SSTAControllerException.class)
+	public final ResponseEntity<SSTAServiceResponse> handleNotFoundException(
+			SSTAControllerException ex) {
+		ResponseEntity<SSTAServiceResponse> response = null;
+		if(ex.getE() instanceof ResourceNotFoundException) {
+			SSTAServiceResponse exceptionResponse = new SSTAServiceResponse(
+					new Date(), ex.getE().getMessage(),
+					HttpStatus.NOT_FOUND.getReasonPhrase());
+			response = new ResponseEntity<SSTAServiceResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
+		}else if(ex.getE() instanceof NumberFormatException){
+			SSTAServiceResponse exceptionResponse = new SSTAServiceResponse(
+					new Date(), ex.getErrMsg(),
+					HttpStatus.BAD_REQUEST.getReasonPhrase());
+			response = new ResponseEntity<SSTAServiceResponse>(exceptionResponse, HttpStatus.BAD_REQUEST);
+		}
+		return response;
+	}
+
 }

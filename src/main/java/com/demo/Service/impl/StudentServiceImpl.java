@@ -55,6 +55,7 @@ public class StudentServiceImpl implements StudentService {
 						SSTAErrorConstants.A1002.getErrorMessage(),
 						this.getClass().getCanonicalName(),
 						new ResourceNotFoundException(id)));
+	
 	}
 
 	@Override

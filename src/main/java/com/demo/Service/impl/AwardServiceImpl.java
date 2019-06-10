@@ -50,13 +50,15 @@ public class AwardServiceImpl implements AwardService {
 	@Override
 	@Transactional
 	public Award getAward(long id)
-			throws NumberFormatException, SSTAControllerException {
+			throws SSTAControllerException {
 		return awardRepository.findById(id)
-				.orElseThrow(() -> new SSTAControllerException(
-						SSTAErrorConstants.A1001.getErrorCode(),
-						SSTAErrorConstants.A1001.getErrorMessage(),
+				.orElseThrow(() -> 
+				new SSTAControllerException(
+						SSTAErrorConstants.A1002.getErrorCode(),
+						SSTAErrorConstants.A1002.getErrorMessage(),
 						this.getClass().getCanonicalName(),
-						new ResourceNotFoundException(id)));
+						new ResourceNotFoundException(id))
+				);
 
 	}
 

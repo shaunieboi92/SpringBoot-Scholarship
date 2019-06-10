@@ -1,5 +1,6 @@
 package com.demo.Model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessType;
+
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -23,11 +28,15 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+//@XmlRootElement(name = "Award")
+//@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "TABLE_AWARD")
-public class Award {
+public class Award implements Serializable{
 	
 //	private List<Award> awards;
+	private static final long serialVersionUID = 1L;
+
 	
 	public Award(Long id, String awardName, String awardDesc,
 			Date startDate, Date endDate, Student student) {

@@ -12,7 +12,9 @@ public class SSTAControllerException extends Exception{
     private String errMsg;
     public Exception e;
  
-    public SSTAControllerException(String errCode, String errMsg, String className, Exception e) {
+ 
+
+	public SSTAControllerException(String errCode, String errMsg, String className, Exception e) {
         this.errCode = errCode;
         this.errMsg = errMsg;
         this.e = e;    
@@ -34,5 +36,13 @@ public class SSTAControllerException extends Exception{
     public void setErrMsg(String errMsg) {
         this.errMsg = errMsg;
     }
+    
+    public Exception getE() {
+ 		return e;
+ 	}
+
+ 	public void setE(Exception e) {
+ 		this.e = e;
+ 	}
 
 }
