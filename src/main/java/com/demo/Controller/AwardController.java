@@ -62,18 +62,8 @@ public class AwardController {
 	@GetMapping(value = SSTAConstants.AWARD + "/{id}")
 	public ResponseEntity<Award> findAwardbyId(@PathVariable long id)
 			throws SSTAControllerException, TypeMismatchException {
-//		try {
 			return new ResponseEntity<Award>(awardService.getAward(id),
 					HttpStatus.OK);
-//		}catch(TypeMismatchException e) {
-//			throw new SSTAControllerException(
-//					SSTAErrorConstants.A1003.getErrorCode(),
-//					SSTAErrorConstants.A1003.getErrorMessage(),
-//					this.getClass().getCanonicalName(),
-//					e);
-//			//Throw illegal argument exception if not handled.
-//		}
-	
 	}
 	
 
@@ -88,19 +78,6 @@ public class AwardController {
 		return awardService.getListOfAwards();
 	}
 	
-	
-	///////
-	
-//	@ExceptionHandler(TypeMismatchException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//	@ResponseBody
-//    public final ResponseEntity<String> handlingTypeMismatchException(TypeMismatchException ex) {
-//		SSTAServiceResponse exceptionResponse = new SSTAServiceResponse(
-//				new Date(), "Type mismatch in parameter value",
-//				HttpStatus.BAD_REQUEST.getReasonPhrase());
-//		return new ResponseEntity<String>("Type mismatch in parameter value." ,HttpStatus.BAD_REQUEST);
-//
-//    }
 	/**
 	 * getAwardByName
 	 * 

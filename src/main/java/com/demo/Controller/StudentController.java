@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,87 +24,92 @@ import com.demo.Model.Student;
 import com.demo.Service.StudentService;
 
 /**
-*
-* Copyright (c) 2019
-* System : SSTAnew
-* Subsystem: StudentController
-* File: StudentController.java
-* Change History
-* Date               Version        Author
-* -------------------------------------------------
-* Jun 6, 2019         v0.1			Shaun
-*
-* Description
-*
-*/
+ *
+ * Copyright (c) 2019 System : SSTAnew Subsystem: StudentController File:
+ * StudentController.java Change History Date Version Author
+ * ------------------------------------------------- Jun 6, 2019 v0.1 Shaun
+ *
+ * Description
+ *
+ */
 @RestController
 @RequestMapping(SSTAConstants.MAIN)
 public class StudentController {
 
 	@Autowired
 	private StudentService studentService;
-	
+
 	/**
 	 * getStudents
+	 * 
 	 * @return List
 	 */
 	@GetMapping(value = SSTAConstants.STUDENT)
-	public List<Student> getStudents(){
-		return studentService.getStudents();				
+	public List<Student> getStudents() {
+		return studentService.getStudents();
 	}
-	
+
 	/**
 	 * getStudentByID
+	 * 
 	 * @param id
 	 * @return Student
-	 * @throws SSTAControllerException 
-	 * @throws ResourceNotFoundException 
-	 * @throws NumberFormatException 
+	 * @throws SSTAControllerException
+	 * @throws ResourceNotFoundException
+	 * @throws NumberFormatException
 	 */
 	@GetMapping(value = SSTAConstants.STUDENT + "/{id}")
-	public Student getStudentByID(@PathVariable Long id) throws NumberFormatException, SSTAControllerException {
-		return studentService.getStudent(id);				
+	public Student getStudentByID(@PathVariable Long id)
+			throws SSTAControllerException, TypeMismatchException {
+		return studentService.getStudent(id);
 	}
-	
+
 	/**
 	 * createNewStudent
+	 * 
 	 * @param student
 	 * @return Student
-	 * @throws SSTAControllerException 
+	 * @throws SSTAControllerException
 	 */
-	@PostMapping(value = SSTAConstants.STUDENT + "/add")
-	public void createNewStudent(@Valid @RequestBody Student student) throws SSTAControllerException {
+	@PostMapping(value = SSTAConstants.STUDENT)
+	public void createNewStudent(@Valid @RequestBody Student student)
+			throws SSTAControllerException {
 		studentService.saveStudent(student);
 	}
-	
-	
+
 	/**
 	 * deleteStudent
+	 * 
 	 * @param id
 	 * @throws SSTAControllerException
 	 */
-	@PostMapping(value = SSTAConstants.STUDENT + "/delete" + "/{id}")
-	public void deleteStudent(@Valid @RequestBody Long id) throws SSTAControllerException {
+	@DeleteMapping(value = SSTAConstants.STUDENT + "/{id}")
+	public void deleteStudent(@Valid @RequestBody Long id)
+			throws SSTAControllerException,TypeMismatchException {
 		studentService.deleteStudent(id);
 	}
-	
+
 	/**
-	  * gettingAwardsByStudentName
-	  *  @param studentName
-	  * @return list
-	  */
-	 @GetMapping(value = SSTAConstants.AWARD + "/retrieveAwards" + "/{studentName}")
-	 public List<Award> getAwardsByStudentName(@PathVariable String studentName) {
-		 return studentService.getAwardsFromStudent(studentName);
-	 }
-	
-	 /**
-	  * Testing
-	  * @return
-	  */
+	 * gettingAwardsByStudentName
+	 * 
+	 * @param studentName
+	 * @return list
+	 */
+	@GetMapping(value = SSTAConstants.AWARD + "/retrieveAwards"
+			+ "/{studentName}")
+	public List<Award> getAwardsByStudentName(
+			@PathVariable String studentName) {
+		return studentService.getAwardsFromStudent(studentName);
+	}
+
+	/**
+	 * Testing
+	 * 
+	 * @return
+	 */
 	@RequestMapping("/test")
 	public String hello() {
 		return "Hello Testing!";
 	}
-	
+
 }
