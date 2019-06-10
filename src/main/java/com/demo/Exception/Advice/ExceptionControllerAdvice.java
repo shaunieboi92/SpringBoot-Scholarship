@@ -25,15 +25,21 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 	
 	//gets enclosed Exception messages
 	@ExceptionHandler(SSTAControllerException.class)
-	public final ResponseEntity<SSTAServiceResponse> handleNotFoundException(
+	public final ResponseEntity<SSTAServiceResponse> handleException(
 			SSTAControllerException ex) {
 		ResponseEntity<SSTAServiceResponse> response = null;
 		if(ex.getE() instanceof ResourceNotFoundException) {
+			/*
+			 * Handles ResourceNotFoundException
+			 */
 			SSTAServiceResponse exceptionResponse = new SSTAServiceResponse(
 					new Date(), ex.getE().getMessage(),
 					HttpStatus.NOT_FOUND.getReasonPhrase());
 			response = new ResponseEntity<SSTAServiceResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
 		}else if(ex.getE() instanceof NumberFormatException){
+			/*
+			 * Handles NumberFormatException
+			 */
 			SSTAServiceResponse exceptionResponse = new SSTAServiceResponse(
 					new Date(), ex.getErrMsg(),
 					HttpStatus.BAD_REQUEST.getReasonPhrase());
