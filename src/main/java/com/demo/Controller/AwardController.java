@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.demo.Constants.SSTAConstants;
 import com.demo.Constants.SSTAErrorConstants;
@@ -61,7 +62,7 @@ public class AwardController {
 	 */
 	@GetMapping(value = SSTAConstants.AWARD + "/{id}")
 	public ResponseEntity<Award> findAwardbyId(@PathVariable long id)
-			throws SSTAControllerException, TypeMismatchException {
+			throws SSTAControllerException, MethodArgumentTypeMismatchException {
 			return new ResponseEntity<Award>(awardService.getAward(id),
 					HttpStatus.OK);
 	}
