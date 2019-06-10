@@ -36,4 +36,6 @@ public interface AwardService {
 	
 	public void deleteAward(long id) throws SSTAControllerException;
 	
+	public Award getAwardByName(String awardName);
+	
 }

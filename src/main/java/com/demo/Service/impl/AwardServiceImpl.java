@@ -51,6 +51,7 @@ public class AwardServiceImpl implements AwardService {
 	@Transactional
 	public Award getAward(long id)
 			throws SSTAControllerException {
+		
 		return awardRepository.findById(id)
 				.orElseThrow(() -> 
 				new SSTAControllerException(
@@ -60,6 +61,14 @@ public class AwardServiceImpl implements AwardService {
 						new ResourceNotFoundException(id))
 				);
 
+	}
+	
+	@Override
+	@Transactional
+	public Award getAwardByName(String awardName){
+		
+		return awardRepository.findByAwardName(awardName);
+				
 	}
 
 	@Override
