@@ -14,6 +14,5 @@ public interface AwardTypeRepository extends JpaRepository<AwardType, BigDecimal
 	/**
 	 * find List by AwardType Name
 	 */
-	@Query("SELECT f FROM AwardType f where LOWER (f.typeName) = LOWER(:typeName)")
 	AwardType findByName(@Param("typeName") String typeName);
 }
