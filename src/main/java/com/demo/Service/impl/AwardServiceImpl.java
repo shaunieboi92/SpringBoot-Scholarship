@@ -106,6 +106,6 @@ public class AwardServiceImpl implements AwardService {
 	@Override
 	@Transactional
 	public List<Award> getListOfAwardsByAwardType(String typeName) {
-		return awardTypeRepository.findByName(typeName).getAwardList();
+		return awardTypeRepository.findByTypeName(typeName).getAwardList();
 	}
 }

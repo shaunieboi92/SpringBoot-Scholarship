@@ -12,7 +12,7 @@ import com.demo.Model.AwardType;
 @Repository
 public interface AwardTypeRepository extends JpaRepository<AwardType, BigDecimal> {
 	/**
-	 * find List by AwardType Name
+	 * find AwardType by AwardType Name
 	 */
-	AwardType findByName(@Param("typeName") String typeName);
+	AwardType findByTypeName(String typeName);
 }

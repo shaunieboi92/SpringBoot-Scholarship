@@ -17,31 +17,12 @@ import com.demo.Repository.StudentRepository;
 
 
 @SpringBootApplication
-//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-public class Application implements CommandLineRunner{
-	
-	@Autowired
-	StudentRepository studentRepo;
+public class Application {
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	@Override
-	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
-//	@Override
-//	public void run(String... args) throws Exception{
-//		Student student = getStudent();
-//		studentRepo.save(student);
-//	}
-//	
-//	private Student getStudent() {
-//		Student student = new Student();
-//		student.setName("Shaun");
-//		student.setNric("SSS");
-//		student.setEmail("test@gmail.com");
-//		return student;
-//	}
+
 }
