@@ -27,8 +27,11 @@ public interface AwardRepository extends JpaRepository<Award, Long> {
 	 */
 	@Query("SELECT f FROM Award f where LOWER(:toDate) >= LOWER (f.startDate) AND LOWER(:toDate) <= LOWER(f.endDate)")
 	Collection<Award> findAllEffective(@Param("toDate") Date toDate);
-	
+		
 	Award findByAwardName (String awardName);
+	
+	
+	
 	
 	
 

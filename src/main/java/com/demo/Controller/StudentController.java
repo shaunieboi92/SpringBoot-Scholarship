@@ -1,8 +1,6 @@
 package com.demo.Controller;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -85,7 +83,7 @@ public class StudentController {
 	 * @throws SSTAControllerException
 	 */
 	@DeleteMapping(value = SSTAConstants.STUDENT + "/{id}")
-	public void deleteStudent(@Valid @RequestBody Long id)
+	public void deleteStudent(@PathVariable Long id)
 			throws SSTAControllerException,MethodArgumentTypeMismatchException {
 		studentService.deleteStudent(id);
 	}
