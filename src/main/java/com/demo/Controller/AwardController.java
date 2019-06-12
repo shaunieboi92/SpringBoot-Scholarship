@@ -82,7 +82,7 @@ public class AwardController {
 	 * 
 	 * @return list
 	 */
-	@RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE)
+	@GetMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE)
 	public List<AwardType> getListOfAwardType() {
 		return awardService.getTypes();
 	}
@@ -92,7 +92,7 @@ public class AwardController {
 	 * 
 	 * @return list
 	 */
-	@RequestMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE
+	@GetMapping(value = SSTAConstants.AWARD + SSTAConstants.AWARD_TYPE
 			+ "/{typeName}")
 	public List<Award> getListOfAwardsByAwardType(
 			@PathVariable String typeName) {
