@@ -59,7 +59,7 @@ public class StudentController {
 	 */
 	@GetMapping(value = SSTAConstants.STUDENT + "/{id}")
 	public Student getStudentByID(@PathVariable Long id)
-			throws SSTAControllerException, TypeMismatchException {
+			throws SSTAControllerException, MethodArgumentTypeMismatchException {
 		return studentService.getStudent(id);
 	}
 
